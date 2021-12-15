@@ -6,6 +6,9 @@ savedvalue(value):
 filesave(score, tps, scorerate, tabasco, bbq, ketchup, mayo, soy):
     update file text
 
+
+#### TURN OFF TRACER IN GAME ####
+
 '''
 inputvalue = ["tacos", "tps", "scorerate", "tabasco", "bbq", "ketchup", "mayo", "soy", "tcost", "bcost", "kcost", "mcost", "scost", "timer"]
 
