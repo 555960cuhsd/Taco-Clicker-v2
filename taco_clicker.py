@@ -14,6 +14,7 @@ wn.addshape("menu0.gif")
 wn.addshape("menuhelp.gif")
 wn.addshape("menuplay.gif")
 wn.addshape("menutaco.gif")
+wn.addshape("menusave.gif")
 wn.addshape("tutorial_end.gif")
 wn.addshape("arrow.gif")
 wn.addshape("arrowleft.gif")
@@ -134,7 +135,6 @@ back_button.setposition(120, -250)
 replay = False
 def back(x, y):
   global replay, game_start, menu
-  save()
   menu = True
   game_start = False
   replay = True
@@ -145,6 +145,7 @@ def back(x, y):
   start_button.showturtle()
   help.showturtle()
   menutaco.showturtle()
+  save_button.showturtle()
   for sauce in sauce_list:
     sauce.hideturtle()
   wn.ontimer(menutaco_up, 1000)
@@ -327,6 +328,7 @@ def update_score(amount):
     help.showturtle()
     start_button.showturtle()
     menutaco.showturtle()
+    save_button.showturtle()
 
     wn.setup(580,449)
     wn.bgpic("menu.gif")
@@ -845,8 +847,17 @@ help.hideturtle()
 help.pu()
 help.speed(0)
 help.shape("menuhelp.gif")
-help.setposition(0, -120)
+help.setposition(0, -100)
 help.showturtle()
+
+# Save button
+save_button = trtl.Turtle()
+save_button.hideturtle()
+save_button.penup()
+save_button.speed(0)
+save_button.shape("menusave.gif")
+save_button.setposition(0, -180)
+save_button.showturtle()
 
 # arrow for tutorial
 arrow = trtl.Turtle()
@@ -875,11 +886,12 @@ def start_game(x, y):
     score_writer.clear()
     rate.clear()
 
+  start_button.hideturtle()
   help.hideturtle()
   menutaco.hideturtle()
+  save_button.hideturtle()
   wn.setup(1200,700)
   wn.bgpic("background.gif")
-  start_button.hideturtle()
   taco.showturtle()
   taco.shape("taco.gif")
   score_writer.write(str(score) + " tacos", font = font_setup)
@@ -909,6 +921,7 @@ def tutorial(x,y):
   tutorialmode = True
   help.hideturtle()
   menutaco.hideturtle()
+  save_button.hideturtle()
   wn.setup(1200,700)
   wn.bgpic("background.gif")
 
@@ -969,7 +982,7 @@ wn.ontimer(menutaco_up, 1000)
 
 # values to save
 
-def save():
+def save(x, y):
   savelist = [score, tacos_per_second, score_rate, tabasco_amount, bbq_sauce_amount, ketchup_amount, mayonnaise_amount, soy_sauce_amount, 
 tabasco_cost, bbq_sauce_cost, ketchup_cost, mayonnaise_cost, soy_sauce_cost, timer_status]
   ts.filesave(savelist)
@@ -984,6 +997,7 @@ burrito.onclick(burrito_click)
 button.onclick(button_click)
 taco.onclick(taco_click)
 back_button.onclick(back)
+save_button.onclick(save)
 
 wn.listen()
 wn.mainloop()
