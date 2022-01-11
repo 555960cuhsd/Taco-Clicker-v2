@@ -7,6 +7,7 @@ import taco_save as ts
 import winsound
 wn = trtl.Screen()
 wn.setup(580,449)
+wn.tracer(False)
 
 # Menu shapes
 wn.addshape("menu.gif")
@@ -121,8 +122,10 @@ tps.setposition(-580, 210)
 tps.write("Current tacos per second: 0")
 tacos_per_second = ts.savedvalue("tps")
 def tps_update():
+  wn.tracer(False)
   tps.clear()
   tps.write("Current tacos per second: "+str(round(tacos_per_second, 2)))
+  wn.tracer(True)
 
 # back button
 back_button = trtl.Turtle()
@@ -347,9 +350,11 @@ def update_score(amount):
   # updating the score (outside of tutorial mode)
   else:
     global score
+    wn.tracer(False)
     score_writer.clear()
     score += amount
     score_writer.write(str(score) + " tacos", font = font_setup)
+    wn.tracer(True)
 
 ####################
 ### Autoclickers ###
@@ -440,11 +445,13 @@ tabasco_writer.write("Current cost: " + str(tabasco_cost) + " tacos")
 
 def update_tabasco():
   global tabasco_amount
+  wn.tracer(False)
   tabasco_writer.clear()
   tabasco_writer.setposition(310, 120)
   tabasco_writer.write(str(tabasco_amount) + " oz. of Tabasco", font = font_setup)
   tabasco_writer.setposition(310, 100)
   tabasco_writer.write("Current cost: " + str(tabasco_cost) + " tacos")
+  wn.tracer(True)
 
 
 #-----bbq sauce-----
@@ -481,11 +488,13 @@ bbq_sauce_writer.write("Current cost: " + str(bbq_sauce_cost) + " tacos")
 
 def update_bbq_sauce():
   global bbq_sauce_amount
+  wn.tracer(False)
   bbq_sauce_writer.clear()
   bbq_sauce_writer.setposition(310, 30)
   bbq_sauce_writer.write(str(bbq_sauce_amount) + " oz. of BBQ Sauce", font = font_setup)
   bbq_sauce_writer.setposition(310, 10)
   bbq_sauce_writer.write("Current cost: " + str(bbq_sauce_cost) + " tacos")
+  wn.tracer(True)
 
 #-----ketchup-----
 ketchup_tacos = 150
@@ -521,11 +530,13 @@ ketchup_writer.write("Current cost: " + str(ketchup_cost) + " tacos")
 
 def update_ketchup():
   global ketchup_amount
+  wn.tracer(False)
   ketchup_writer.clear()
   ketchup_writer.setposition(310, -60)
   ketchup_writer.write(str(ketchup_amount) + " oz. of Ketchup", font = font_setup)
   ketchup_writer.setposition(310, -80)
   ketchup_writer.write("Current cost: " + str(ketchup_cost) + " tacos")
+  wn.tracer(True)
 
 
 #-----mayonnaise-----
@@ -562,11 +573,13 @@ mayonnaise_writer.write("Current cost: " + str(mayonnaise_cost) + " tacos")
 
 def update_mayonnaise():
   global mayonnaise_amount
+  wn.tracer(False)
   mayonnaise_writer.clear()
   mayonnaise_writer.setposition(310, -150)
   mayonnaise_writer.write(str(mayonnaise_amount) + " oz. of mayonnaise", font = font_setup)
   mayonnaise_writer.setposition(310, -170)
   mayonnaise_writer.write("Current cost: " + str(mayonnaise_cost) + " tacos")
+  wn.tracer(True)
 
 
 #-----soy sauce-----
@@ -603,17 +616,20 @@ soy_sauce_writer.write("Current cost: " + str(soy_sauce_cost) + " tacos")
 
 def update_soy_sauce():
   global soy_sauce_amount
+  wn.tracer(False)
   soy_sauce_writer.clear()
   soy_sauce_writer.setposition(310, -240)
   soy_sauce_writer.write(str(soy_sauce_amount) + " oz. of Soy Sauce", font = font_setup)
   soy_sauce_writer.setposition(310, -260)
   soy_sauce_writer.write("Current cost: " + str(soy_sauce_cost) + " tacos")
+  wn.tracer(True)
 
 
 #############
 ### Timer ###
 #############
 timer_status = ts.savedvalue("timer")
+print("timer status is"+str(timer_status))
 
 # Timers for tabasco, bbq, ketchup, mayo, and soy sauce
 ttimer = trtl.Turtle()
@@ -651,6 +667,7 @@ def one_second_image(sauce_timer):
 
 # checking which timers are on
 def timer_check():
+  print("B")
   if ttimer_on == True: 
     if level == 1: ttimer.shape("timer1.gif")
     elif level == 2: ttimer.shape("timer2.gif")
@@ -785,9 +802,11 @@ def upgrade():
     score_writer.write(str(score) + " tacos", font = font_setup)
     upgrade_cost = (score_rate*3)**2
 
+    wn.tracer(False)
     next.clear()
     next.write("Next upgrade: " + str(upgrade_cost) + " tacos",font = ("Arial", "7", "italic"))
     button.shape("buttonunpressed.gif")
+    wn.tracer(True)
 
 ###################
 ### Menu Screen ###
@@ -870,6 +889,7 @@ arrow.shape("arrow.gif")
 def start_game(x, y):
   global game_start, menu, tutorialmode, replay
   game_start = True
+  wn.tracer(False)
 
   #winsound.PlaySound("gamemusic.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
   # screen setup
@@ -911,6 +931,7 @@ def start_game(x, y):
   wn.ontimer(taco_up, 1000)
   if timer_status == True: sauce_timer()
   print(timer_status)
+  wn.tracer(True)
     
   
 # tutorial function
@@ -918,6 +939,7 @@ def tutorial(x,y):
   # screen setup
   #winsound.PlaySound("btsmusic.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
   global tutorialmode
+  wn.tracer(False)
   tutorialmode = True
   help.hideturtle()
   menutaco.hideturtle()
@@ -965,6 +987,7 @@ def tutorial(x,y):
   arrow.write("Press the Taco to",font = ("Arial", "10", "italic"))
   arrow.setposition(-50, -160)
   arrow.write("increase your score",font = ("Arial", "10", "italic"))
+  wn.tracer(True)
 
 def arrow_stamp():
   arrow.showturtle()
@@ -999,5 +1022,6 @@ taco.onclick(taco_click)
 back_button.onclick(back)
 save_button.onclick(save)
 
+wn.tracer(True)
 wn.listen()
 wn.mainloop()

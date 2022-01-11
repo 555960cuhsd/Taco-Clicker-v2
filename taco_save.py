@@ -6,9 +6,6 @@ savedvalue(value):
 filesave(score, tps, scorerate, tabasco, bbq, ketchup, mayo, soy):
     update file text
 
-
-#### TURN OFF TRACER IN GAME ####
-
 '''
 inputvalue = ["tacos", "tps", "scorerate", "tabasco", "bbq", "ketchup", "mayo", "soy", "tcost", "bcost", "kcost", "mcost", "scost", "timer"]
 
@@ -22,8 +19,7 @@ def savedvalue(value):
     if value == "tps":
         return float(all_values[inputvalue.index(value)])   
     elif value == "timer":
-        print(all_values[inputvalue.index(value)] == "True")
-        return all_values[inputvalue.index(value)] == "True"
+        return all_values[inputvalue.index(value)] == "True\n"
     elif value != "tps" and value != "timer":
         return int(all_values[inputvalue.index(value)])
     saved_file.close()
